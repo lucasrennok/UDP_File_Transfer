@@ -29,7 +29,6 @@ int main(int argc, char *argv[]) {
 
   int bind_server;
   struct sockaddr_in cliente, server;
-  char mensagem[MAX_MSG]="";
   
   /* criação do socket do servidor */
   socket_server = socket(AF_INET, SOCK_DGRAM, 0);
@@ -120,7 +119,7 @@ int main(int argc, char *argv[]) {
       }//se existe um nó com o arquivo
       else if(flag==0){
         //envia resposta para o cliente1 e depois para cliente2
-        sprintf(dados_enviar,"ACK %s %s",ip,porta);
+        sprintf(dados_enviar,"ACK %s %s",ip_cliente2,porta_cliente2);
 
         //envia dados pro cliente
         bind_server = sendto(socket_server, dados_enviar, sizeof(dados_enviar)+1, 0, 

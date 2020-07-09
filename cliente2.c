@@ -107,7 +107,6 @@ int main(int argc, char *argv[]) {
       //envio de dados enquanto não for o final do arquivo
       while(!feof(arquivo)){
         memset(checksum,0x0,11);
-        memset(mensagem_envio,0x0,MAX_MSG);
 
         //tamanho do cabeçalho
         espaco_cabecalho = 4+digitos_numero(num_pacote)+1+digitos_numero(termino)+1+sizeof(checksum)-1+1;
@@ -165,6 +164,7 @@ int main(int argc, char *argv[]) {
         //se a resposta for uma confirmação, vai pro próximo pacote
         if(strncmp("ACK",mensagem,3)==0){
             num_pacote++;
+            memset(mensagem_envio,0x0,MAX_MSG);
         }//senão se de erro, ele mantém os dados desse pacote para reenviar
         else if(strncmp("NGC",mensagem, 3)==0){
             //pega num pacote com problema  
